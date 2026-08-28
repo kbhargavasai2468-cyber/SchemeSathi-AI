@@ -6,6 +6,7 @@ import ProfileForm from './components/ProfileForm';
 import AnalysisLoading from './components/AnalysisLoading';
 import ResultsView from './components/ResultsView';
 import ErrorView from './components/ErrorView';
+import { API_BASE_URL } from './config/api';
 import './App.css';
 
 export function App() {
@@ -60,7 +61,7 @@ export function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     try {
-      const response = await fetch('/api/assessment', {
+      const response = await fetch(`${API_BASE_URL}/api/assessment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
