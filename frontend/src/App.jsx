@@ -64,7 +64,8 @@ export function App() {
       const response = await fetch(`${API_BASE_URL}/api/assessment`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({
           userProfile: profileData
@@ -82,7 +83,11 @@ export function App() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       console.error('Assessment API Error:', err);
-      setErrorMessage(err.message || 'Failed to complete scheme assessment. Please ensure the backend server is running.');
+      let friendlyMessage = err.message || 'Failed to complete scheme assessment.';
+      if (friendlyMessage.includes('Failed to fetch') || friendlyMessage.includes('NetworkError')) {
+        friendlyMessage = 'Unable to reach the SchemeSathi assessment server. On free tier hosts, the backend may take up to 50 seconds to wake up from sleep. Please click "Try Again" below.';
+      }
+      setErrorMessage(friendlyMessage);
       setCurrentStep('error');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
