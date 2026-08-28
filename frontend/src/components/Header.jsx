@@ -43,7 +43,7 @@ export const Header = ({ onNavigate, currentStep }) => {
               onClick={() => onNavigate('profile')}
               type="button"
             >
-              Check Eligibility
+              Start Assessment →
             </button>
           </nav>
         </div>

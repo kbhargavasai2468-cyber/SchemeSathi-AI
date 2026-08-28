@@ -7,7 +7,6 @@ export const ResultsView = ({ result, userProfile, onReset }) => {
   const masterChecklist = result.documentChecklist?.masterChecklist || [];
   const procurementTips = result.documentChecklist?.procurementTips || [];
   const roadmap = result.roadmap || {};
-  const roadmapPhases = roadmap.phases || [];
 
   // Metrics counts
   const eligibleCount = verifiedSchemes.filter(s => s.eligibilityStatus === 'ELIGIBLE').length;
@@ -84,7 +83,7 @@ export const ResultsView = ({ result, userProfile, onReset }) => {
 
       {/* Trust Notice */}
       <div className="trust-banner">
-        🛡️ <strong>Verified Information:</strong> Information is based on our verified government scheme database. Always verify details on the official portal before applying.
+        🛡️ <strong>Verified Information:</strong> Recommendations are derived directly from official government scheme rules and verified portals.
       </div>
 
       {/* Scheme Cards List */}
@@ -128,7 +127,7 @@ export const ResultsView = ({ result, userProfile, onReset }) => {
 
                 {/* Benefits */}
                 <div className="scheme-section-block">
-                  <div className="scheme-section-label">Benefits</div>
+                  <div className="scheme-section-label">Official Benefits</div>
                   <p className="scheme-benefits-text">
                     {scheme.benefitSummary || 'Information not available in our verified database.'}
                   </p>
@@ -172,7 +171,7 @@ export const ResultsView = ({ result, userProfile, onReset }) => {
                     <button 
                       type="button" 
                       className="btn-action-jump"
-                      onClick={() => scrollToSection('your-action-plan')}
+                      onClick={() => scrollToSection('what-to-do-next')}
                     >
                       See What To Do ↓
                     </button>
@@ -200,7 +199,7 @@ export const ResultsView = ({ result, userProfile, onReset }) => {
         <section className="docs-checklist-card">
           <h2 className="section-title">Required Documents Checklist</h2>
           <p className="section-subtitle">
-            Gather these documents before applying for your matching schemes.
+            Gather these documents before starting your application on the official government portals.
           </p>
 
           <div className="checklist-items-grid">
@@ -237,41 +236,41 @@ export const ResultsView = ({ result, userProfile, onReset }) => {
         </section>
       )}
 
-      {/* FINAL ACTION PLAN SECTION */}
-      <section id="your-action-plan" className="roadmap-section">
+      {/* FINAL WHAT TO DO NEXT / APPLICATION SUMMARY SECTION */}
+      <section id="what-to-do-next" className="roadmap-section">
         <div className="roadmap-header">
-          <h2 className="roadmap-title">Your Action Plan</h2>
+          <h2 className="roadmap-title">What To Do Next</h2>
           <p className="roadmap-summary">
-            Follow this simple step-by-step guide to complete your application on the official government portal.
+            A simple, clear summary to guide your application from start to finish.
           </p>
         </div>
 
-        {/* 5-Step Clear Action Guide */}
+        {/* 5-Step Action Summary */}
         <div className="action-plan-steps-list">
-          {/* Step 1 */}
+          {/* 1. Documents to prepare */}
           <div className="action-step-card">
             <div className="action-step-header">
               <span className="action-step-num">1</span>
-              <h3 className="action-step-title">Get Your Documents</h3>
+              <h3 className="action-step-title">Documents to Prepare</h3>
             </div>
             <p className="action-step-desc">
-              Collect all required documents listed above (such as your Aadhaar card, income certificate, and bank details) and make sure your details match identically.
+              Arrange your mandatory documents (Aadhaar Card, income proof, and bank passbook). Ensure names and dates of birth match exactly across all identity proofs.
             </p>
             {masterChecklist.length > 0 && (
               <div className="action-step-docs-mini">
-                <strong>Documents to arrange:</strong> {masterChecklist.map(d => d.name).join(', ')}
+                <strong>Checklist:</strong> {masterChecklist.map(d => d.name).join(', ')}
               </div>
             )}
           </div>
 
-          {/* Step 2 */}
+          {/* 2. Where to apply */}
           <div className="action-step-card">
             <div className="action-step-header">
               <span className="action-step-num">2</span>
-              <h3 className="action-step-title">Apply for the Scheme</h3>
+              <h3 className="action-step-title">Where to Apply</h3>
             </div>
             <p className="action-step-desc">
-              Visit the verified official government portal. Look for the "New Registration" or "Citizen Assessment" section and fill in your details accurately.
+              Apply directly on the verified official government portal for each scheme, or visit your nearest Common Service Centre (CSC) or designated bank branch.
             </p>
             {verifiedSchemes.length > 0 && (
               <div className="action-step-links-list">
@@ -283,48 +282,48 @@ export const ResultsView = ({ result, userProfile, onReset }) => {
                     rel="noopener noreferrer"
                     className="action-portal-btn"
                   >
-                    Open {s.title} Portal ({s.officialPortalUrl}) ↗
+                    {s.title} Portal ({s.officialPortalUrl}) ↗
                   </a>
                 ) : null)}
               </div>
             )}
           </div>
 
-          {/* Step 3 */}
+          {/* 3. How to apply */}
           <div className="action-step-card">
             <div className="action-step-header">
               <span className="action-step-num">3</span>
-              <h3 className="action-step-title">Submit Your Documents</h3>
+              <h3 className="action-step-title">How to Apply</h3>
             </div>
             <p className="action-step-desc">
-              Upload clear, readable copies of your documents on the official portal, or submit self-attested photocopies if applying through your local bank or Common Service Centre (CSC).
+              Open the official portal, click on "Citizen Registration" / "New Application", fill in your details accurately, and upload clear scanned copies of your prepared documents.
             </p>
           </div>
 
-          {/* Step 4 */}
+          {/* 4. Official application link */}
           <div className="action-step-card">
             <div className="action-step-header">
               <span className="action-step-num">4</span>
-              <h3 className="action-step-title">Save Your Application Details</h3>
+              <h3 className="action-step-title">Official Application Link</h3>
             </div>
             <p className="action-step-desc">
-              Once you submit, save your Application Number / Acknowledgment Slip. Take a screenshot or print the receipt for future reference.
+              Always use the official government portal links verified by SchemeSathi AI. Never pay fees on unofficial or third-party websites.
             </p>
           </div>
 
-          {/* Step 5 */}
+          {/* 5. What to do after applying */}
           <div className="action-step-card">
             <div className="action-step-header">
               <span className="action-step-num">5</span>
-              <h3 className="action-step-title">Track Your Application</h3>
+              <h3 className="action-step-title">What to Do After Applying</h3>
             </div>
             <p className="action-step-desc">
-              Check your application status periodically on the official government portal using your Application Number.
+              Download and save your Application Acknowledgment Slip. Keep your Application Reference ID safe to track your status on the official portal.
             </p>
           </div>
         </div>
 
-        {/* Prominent Official Portal Button */}
+        {/* Prominent Official Portal CTA Button */}
         {primaryOfficialUrl ? (
           <div className="portal-cta-banner">
             <div>
